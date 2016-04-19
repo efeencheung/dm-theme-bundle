@@ -1,0 +1,26 @@
+{
+    "name": "efeencheung/dm-theme-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony DmThemeBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Efeen Cheung",
+            "email": "261969254@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.9",
+        "symfony/framework-bundle": "2.8.*",
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "knplabs/knp-menu-bundle": "~2.1"
+    },
+    "autoload": {
+        "psr-4": { "Dm\\Bundle\\ThemeBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
