@@ -201,6 +201,41 @@
     {{ block('form_widget_simple') }}
 {%- endblock email_widget -%}
 
+{%- block file_widget -%}
+    {%- set type = type|default('file') -%}
+    <div class="fileinput fileinput-new" data-provides="fileinput">
+        <div class="input-group input-large">
+            <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                <span class="fileinput-filename"> </span>
+            </div>
+            <span class="input-group-addon btn default btn-file">
+                <span class="fileinput-new"> 选择文件 </span>
+                <span class="fileinput-exists"> 更改 </span>
+                {{ block('form_widget_simple') }}
+            </span>
+            <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> 删除 </a>
+        </div>
+    </div>
+{%- endblock file_widget -%}
+
+{%- block imagine_widget -%}
+    {%- set type = type|default('file') -%}
+	<div class="fileinput fileinput-new" data-provides="fileinput">
+        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
+            <img src="/uploads/images/{{ value }}" alt="..."> 
+        </div>
+		<div>
+			<span class="btn red btn-outline btn-file">
+				<span class="fileinput-new"> 选择图片 </span>
+				<span class="fileinput-exists"> 更改 </span>
+				{{ block('form_widget_simple') }}
+            </span>
+			<a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 删除 </a>
+		</div>
+	</div>
+{%- endblock imagine_widget -%}
+
 {%- block button_widget -%}
     {%- if label is empty -%}
         {%- if label_format is not empty -%}
@@ -272,17 +307,30 @@
 {%- endblock repeated_row -%}
 
 {% block form_row -%}
-    <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+    <div class="form-group{% if not valid %} has-error{% endif %}">
         {{ form_label(form) -}}
         <div class="{{ block('form_group_class') }}">
+        {% if not compound %}
             {{- form_widget(form) -}}
+        {% else %}
+            {% for child in form  %}
+            {{ form_widget(child) }}
+            {% endfor %}
+        {% endif %}
             <span class="help-block help-block-error errors-container"></span>
             <span class="help-block">
                 {%- if form.vars.attr.help is defined -%}
                 {{ form.vars.attr.help }}
                 {%- endif -%}
             </span>
+        {% if not compound %}
             {{- form_errors(form) -}}
+        {% else %}
+            {% for child in form  %}
+            {{ form_errors(child) }}
+            {% endfor %}
+        {% endif %}
+            <span class="help-block help-block-error errors-container"></span>
         </div>
     </div>
 {%- endblock form_row %}
