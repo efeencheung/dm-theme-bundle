@@ -32,8 +32,8 @@
 {%- endblock collection_widget -%}
 
 {% block textarea_widget -%}
-    {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) %}
-    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    {% set attr = attr|merge({class: (attr.class|default('summernote') ~ ' form-control')|trim}) %}
+    <textarea row="10" {{ block('widget_attributes') }}>{{ value }}</textarea>
 {%- endblock textarea_widget %}
 
 {%- block choice_widget -%}
@@ -90,7 +90,11 @@
 {%- endblock choice_widget_options -%}
 
 {%- block checkbox_widget -%}
-    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+<div class="checkbox">
+    <label>
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label }}
+    </label>
+</div>
 {%- endblock checkbox_widget -%}
 
 {%- block radio_widget -%}
@@ -147,7 +151,8 @@
 
 {%- block number_widget -%}
     {# type="number" doesn't work with floats #}
-    {%- set type = type|default('text') -%}
+    {%- set type = type|default('number') -%}
+    {%- set attr = attr|merge({class: ('input-xsmall ' ~ attr.class|default('default'))|trim}) -%}
     {{ block('form_widget_simple') }}
 {%- endblock number_widget -%}
 
@@ -223,7 +228,9 @@
     {%- set type = type|default('file') -%}
 	<div class="fileinput fileinput-new" data-provides="fileinput">
         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
+            {% if value  %}
             <img src="/uploads/images/{{ value }}" alt="..."> 
+            {% endif %}
         </div>
 		<div>
 			<span class="btn red btn-outline btn-file">
@@ -317,7 +324,6 @@
             {{ form_widget(child) }}
             {% endfor %}
         {% endif %}
-            <span class="help-block help-block-error errors-container"></span>
             <span class="help-block">
                 {%- if form.vars.attr.help is defined -%}
                 {{ form.vars.attr.help }}
@@ -379,6 +385,7 @@
         <div class="{{ block('form_label_class') }}"></div>
         <div class="{{ block('form_group_class') }}">
             {{ form_widget(form) }}
+            <span class="help-block help-block-error errors-container"></span>
             {{ form_errors(form) }}
         </div>
     </div>

@@ -12,4 +12,21 @@ $(document).ready(function(){
             $('#delete_form_hidden_'+did).submit();
         }
     });
+
+    /* summer note 编辑器 */
+    $('.summernote').summernote({
+        height: 200,
+        lang: 'zh-CN',
+		toolbar: [
+			['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+			['fontsize', ['fontsize']],
+			['color', ['color']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']],
+			['misc', ['fullscreen']],
+		]
+    });
+    $('.summernote').parent().removeClass('col-md-4');
+    $('.summernote').parent().addClass('col-md-10');
+
 });

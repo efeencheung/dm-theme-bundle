@@ -8,7 +8,15 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>{% block title %}电马管理控制系统{% endblock %}</title>
+        <title>
+            {%- block title -%}
+            {%- if site_name is defined and site_name -%}
+            {{- site_name -}} 
+            {%- else -%}
+            {{- '电马科技中心' -}}
+            {%- endif -%}
+            {%- endblock -%}
+        -管理系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
@@ -24,6 +32,7 @@
         <link href="/bundles/dmtheme/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
         <link href="/bundles/dmtheme/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
         <link href="/bundles/dmtheme/bootstrap-fileinput/css/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+        <link href="/bundles/dmtheme/summernote/css/summernote.css" rel="stylesheet" type="text/css" />
         <!-- END 全局必备样式 -->
         {% endblock %}
         <!-- BEGIN 组件插件样式 -->
@@ -48,7 +57,15 @@
             <div class="page-header-inner ">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
-                    <a href="{{ path('dashboard') }}" class="text-logo font-red"><span class="logo-default">电马科技中心</span></a>
+                    <a href="{{ path('dashboard') }}" class="text-logo font-red">
+                        <span class="logo-default">
+                            {%- if site_name is defined and site_name -%}
+                            {{- site_name -}} 
+                            {%- else -%}
+                            {{- '电马科技中心' -}}
+                            {%- endif -%}
+                        </span>
+                    </a>
                     <div class="menu-toggler sidebar-toggler"> </div>
                 </div>
                 <!-- END LOGO -->
@@ -60,7 +77,11 @@
                     <ul class="nav navbar-nav pull-right">
                         <li class="dropdown dropdown-user">
                             <a href="javascript:;" class="dropdown-toggle">
+                                {% if app.user.avatar is defined and app.user.avatar %}
+                                <img alt="" class="img-circle" src="{{ ('/uploads/images/' ~ app.user.avatar.path)|imagine_filter('avatar_thumb') }}" />
+                                {% else %}
                                 <img alt="" class="img-circle" src="/bundles/dmtheme/metronic/img/avatar.png" />
+                                {% endif %}
                                 <span class="username username-hide-on-mobile">
                                     {%- if app.user.username is defined -%}
                                     {{- app.user.username -}}
@@ -137,7 +158,12 @@
         {% endblock %}
         <!-- BEGIN 底部 -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2013 - 2016 &copy; 电马科技
+            <div class="page-footer-inner"> 2010 - 2016 &copy;  
+                {% if site_name is defined and site_name -%}
+                {{- site_name -}} 
+                {%- else -%}
+                {{- '电马科技中心' -}}
+                {%- endif -%}
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>
@@ -157,6 +183,8 @@
         <script src="/bundles/dmtheme/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
         <script src="/bundles/dmtheme/bootstrap-select/js/i18n/defaults-zh_CN.min.js" type="text/javascript"></script>
         <script src="/bundles/dmtheme/bootstrap-fileinput/js/bootstrap-fileinput.js" type="text/javascript"></script>
+        <script src="/bundles/dmtheme/summernote/js/summernote.min.js" type="text/javascript"></script>
+        <script src="/bundles/dmtheme/summernote/js/lang/zh-CN.js" type="text/javascript"></script>
         <script src="/bundles/dmtheme/uniform/jquery.uniform.js" type="text/javascript"></script>
         <script src="/bundles/dmtheme/parsley/js/parsley.js" type="text/javascript"></script>
         <script src="/bundles/dmtheme/confirmation/js/confirmation.js" type="text/javascript"></script>
