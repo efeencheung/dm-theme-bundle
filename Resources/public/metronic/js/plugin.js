@@ -15,10 +15,10 @@ $(document).ready(function(){
 
     /* summer note 编辑器 */
     $('.summernote').summernote({
-        height: 200,
+        height: 150,
         lang: 'zh-CN',
 		toolbar: [
-			['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+			['style', ['bold', 'italic', 'underline', 'clear']],
 			['fontsize', ['fontsize']],
 			['color', ['color']],
 			['para', ['ul', 'ol', 'paragraph']],
@@ -27,6 +27,6 @@ $(document).ready(function(){
 		]
     });
     $('.summernote').parent().removeClass('col-md-4');
-    $('.summernote').parent().addClass('col-md-10');
+    $('.summernote').parent().addClass('col-md-6');
 
 });

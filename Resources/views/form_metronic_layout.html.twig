@@ -1,4 +1,4 @@
-{# Widgets #}
+# Widgets #}
 
 {%- block form_widget -%}
     {% if compound %}
@@ -33,7 +33,7 @@
 
 {% block textarea_widget -%}
     {% set attr = attr|merge({class: (attr.class|default('summernote') ~ ' form-control')|trim}) %}
-    <textarea row="10" {{ block('widget_attributes') }}>{{ value }}</textarea>
+    <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
 {%- endblock textarea_widget %}
 
 {%- block choice_widget -%}
