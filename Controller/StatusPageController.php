@@ -21,7 +21,7 @@ class StatusPageController extends Controller
      */
     public function homeAction()
     {
-        return $this->redirect($this->generateUrl('dashboard'));
+        return $this->redirect($this->generateUrl('homepage'));
     }
 
     /**
