@@ -17,14 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class StatusPageController extends Controller
 {
     /**
-     * @Route("/")
-     */
-    public function homeAction()
-    {
-        return $this->redirect($this->generateUrl('homepage'));
-    }
-
-    /**
      * @Route("/denied")
      * @Template()
      */

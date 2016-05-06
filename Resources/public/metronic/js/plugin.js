@@ -21,8 +21,8 @@ $(document).ready(function(){
 		toolbar: [
 			['style', ['bold', 'italic', 'underline', 'clear']],
 			['fontsize', ['fontsize']],
-			['color', ['color']],
 			['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture']],
 			['height', ['height']],
 			['misc', ['fullscreen']],
 		]
